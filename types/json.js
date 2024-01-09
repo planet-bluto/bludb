@@ -16,7 +16,7 @@ function buildAdapter(root = "db") {
       try {
         data = await fse.readJson(this.path)
       } catch (err) {
-        print(err)
+        // print(err)
         data = null
       }
 
