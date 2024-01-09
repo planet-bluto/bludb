@@ -1,0 +1,19 @@
+{
+  "name": "bludb",
+  "version": "0.0.1",
+  "description": "Databasing Solution that has redundancy and async options and ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PlanetBluto",
+  "license": "ISC",
+  "dependencies": {
+    "@replit/database": "^2.0.5",
+    "fs-extra": "^11.2.0",
+    "gsheetdb": "^1.0.5",
+    "lodash": "^4.17.21",
+    "lowdb": "^7.0.1",
+    "task-manager": "file:../task-manager"
+  }
+}
