@@ -145,6 +145,6 @@ class BluDB {
 var JSONBuilder = require("./types/json.js")
 // var JSONBuilder = (() => {return JSONFile})
 var REPLBuilder = require("./types/repl.js")
-var SheetBuilder = require("./types/sheet.js")
+// var SheetBuilder = require("./types/sheet.js")
 
-module.exports = {BluDB, SheetBuilder, REPLBuilder, JSONBuilder}
+module.exports = {BluDB, REPLBuilder, JSONBuilder}
