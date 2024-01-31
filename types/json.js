@@ -59,7 +59,14 @@ function buildAdapter(root = "db") {
   }
 
   async function deleter(db_key) {
-    await fs.unlink(path.join(root, (db_key + ".json")))
+    var dbFilePath = path.join(root, (db_key + ".json"))
+
+    try {
+      await fs.access(dbFilePath)
+      await fs.unlink(dbFilePath)
+    } catch(err) {
+      // Not real??
+    }
   }
 
   return [JSONAdapter, getKeys, deleter]

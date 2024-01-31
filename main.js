@@ -110,17 +110,17 @@ class BluDB {
 
 				await Promise.all([main_write, other_writes])
 			},
-			delete: async () => {
-				main_db.data = raid_db.data
-				var deletes = []
-				this._deleters.forEach(deleter => {
-					deletes.push(deleter(db_key))
-				})
+			// delete: async () => {
+			// 	main_db.data = raid_db.data
+			// 	var deletes = []
+			// 	this._deleters.forEach(deleter => {
+			// 		deletes.push(deleter(db_key))
+			// 	})
 
-				// var other_writes = this._clone(db_key, raid_db.data)
+			// 	// var other_writes = this._clone(db_key, raid_db.data)
 
-				await Promise.all(deletes)
-			}
+			// 	await Promise.all(deletes)
+			// }
 		}
 
 		return raid_db
@@ -137,8 +137,20 @@ class BluDB {
 		return result
 	}
 
-	async delete() {
-		
+	async delete(db_key) {
+		var keys = await this.keys()
+		if (keys.includes(db_key)) {
+			var deletes = []
+
+			this._deleters.forEach(deleter => {
+				deletes.push(deleter(db_key))
+			})
+
+			await Promise.all(deletes)
+			return true
+		} else {
+			return false
+		}
 	}
 }
 
