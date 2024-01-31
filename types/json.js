@@ -58,7 +58,11 @@ function buildAdapter(root = "db") {
     return Array.from(keys)
   }
 
-  return [JSONAdapter, getKeys]
+  async function deleter(db_key) {
+    await fs.unlink(path.join(root, (db_key + ".json")))
+  }
+
+  return [JSONAdapter, getKeys, deleter]
 }
 
 module.exports = buildAdapter

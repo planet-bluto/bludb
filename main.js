@@ -21,6 +21,7 @@ class BluDB {
 	constructor(...args) {
 		this._adapters = []
 		this._key_getters = []
+		this._deleters = []
 
 		var yuh = async (arr, thisKey, thisInd) => {
 			let ind = this[thisKey].length
@@ -36,6 +37,7 @@ class BluDB {
 
 		args.map((arr, ind) => yuh(arr, "_adapters", 0))
 		args.map((arr, ind) => yuh(arr, "_key_getters", 1))
+		args.map((arr, ind) => yuh(arr, "_deleters", 2))
 		this._defaults = []
 	}
 
@@ -108,6 +110,17 @@ class BluDB {
 
 				await Promise.all([main_write, other_writes])
 			},
+			delete: async () => {
+				main_db.data = raid_db.data
+				var deletes = []
+				this._deleters.forEach(deleter => {
+					deletes.push(deleter(db_key))
+				})
+
+				// var other_writes = this._clone(db_key, raid_db.data)
+
+				await Promise.all(deletes)
+			}
 		}
 
 		return raid_db
@@ -122,6 +135,10 @@ class BluDB {
 		// print(this._key_getters)
 		var result = await this._key_getters[0]()
 		return result
+	}
+
+	async delete() {
+		
 	}
 }
 

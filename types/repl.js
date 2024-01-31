@@ -2,6 +2,7 @@ const Database = require("@replit/database")
 
 function buildAdapter(URL) {
   var db = new Database(URL)
+  var db_key; 
 
   class REPLAdapter {
     constructor(db_key) {
@@ -26,7 +27,11 @@ function buildAdapter(URL) {
     return keys
   }
 
-  return [REPLAdapter, getKeys]
+  async function deleter(db_key) {
+    await db.delete(db_key)
+  }
+
+  return [REPLAdapter, getKeys, deleter]
 }
 
 module.exports = buildAdapter
