@@ -2,7 +2,6 @@ const Database = require("@replit/database")
 
 function buildAdapter(URL) {
   var db = new Database(URL)
-  var db_key; 
 
   class REPLAdapter {
     constructor(db_key) {
